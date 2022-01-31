@@ -20,6 +20,13 @@ from .numbers import normalize_numbers
 # Regular expression matching whitespace:
 _whitespace_re = re.compile(r'\s+')
 
+_ru_abbreviations = [(re.compile('\\b%s\\.' % x[0], re.IGNORECASE), x[1]) for x in [
+  ('руб', 'рублей'),
+  ('млн', 'миллионов'),
+  ('млрд', 'миллиардов'),
+  ('тыс', 'тысяч')
+]]
+
 # List of (regular expression, replacement) pairs for abbreviations:
 _abbreviations = [(re.compile('\\b%s\\.' % x[0], re.IGNORECASE), x[1]) for x in [
   ('mrs', 'misess'),
@@ -70,6 +77,14 @@ def basic_cleaners(text):
   text = lowercase(text)
   text = collapse_whitespace(text)
   return text
+
+
+def russian_cleaners(text):
+  '''Cleaners to remove CHERT speach'''
+  cleaned = basic_cleaners(text)
+  for regex, replacement in _ru_abbreviations:
+    cleaned = re.sub(regex, replacement, cleaned)
+  return cleaned
 
 
 def transliteration_cleaners(text):

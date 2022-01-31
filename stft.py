@@ -77,10 +77,16 @@ class STFT(torch.nn.Module):
     def transform(self, input_data):
         num_batches = input_data.size(0)
         num_samples = input_data.size(1)
+        # if input_data.size(2) > 1:
+        #     input_data = input_data[:, :, 0]
+        #     print("STEREO FOUND!!!")
 
         self.num_samples = num_samples
 
         # similar to librosa, reflect-pad the input
+        # print(input_data.size(0))
+        # print(input_data.size(1))
+        # print(input_data.size())
         input_data = input_data.view(num_batches, 1, num_samples)
         input_data = F.pad(
             input_data.unsqueeze(1),

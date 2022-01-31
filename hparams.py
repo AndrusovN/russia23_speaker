@@ -10,8 +10,8 @@ def create_hparams(hparams_string=None, verbose=False):
         # Experiment Parameters        #
         ################################
         epochs=500,
-        iters_per_checkpoint=1000,
-        seed=1234,
+        iters_per_checkpoint=650,
+        seed=12345,
         dynamic_loss_scaling=True,
         fp16_run=False,
         distributed_run=False,
@@ -25,9 +25,9 @@ def create_hparams(hparams_string=None, verbose=False):
         # Data Parameters             #
         ################################
         load_mel_from_disk=False,
-        training_files='filelists/ljs_audio_text_train_filelist.txt',
-        validation_files='filelists/ljs_audio_text_val_filelist.txt',
-        text_cleaners=['english_cleaners'],
+        training_files='filelists/vyacheslav_train1.txt',
+        validation_files='filelists/vyacheslav_validation1.txt',
+        text_cleaners=['russian_cleaners'],
 
         ################################
         # Audio Parameters             #
@@ -81,7 +81,7 @@ def create_hparams(hparams_string=None, verbose=False):
         learning_rate=1e-3,
         weight_decay=1e-6,
         grad_clip_thresh=1.0,
-        batch_size=64,
+        batch_size=2,
         mask_padding=True  # set model's padded outputs to padded values
     )
 
